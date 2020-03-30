@@ -3,11 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;netstandard2.0</TargetFrameworks>
     <PackOnBuild>true</PackOnBuild>
-    <RepositoryUrl>https://github.com/ShowingCloud/Hamul</RepositoryUrl>
-    <ReleaseVersion>0.1</ReleaseVersion>
-    <Description>Based on Net Topology Suite, Hamul is a suite of 2D & 3D geographical toolkits
+    <RepositoryUrl>https://github.com/ShowingCloud/Alpherg</RepositoryUrl>
+    <ReleaseVersion>0.3</ReleaseVersion>
+    <Description>Alpherg is a tiny experimental project decrypting some UDP packets
 
-https://github.com/ShowingCloud/Hamul</Description>
+https://github.com/ShowingCloud/Alpherg</Description>
+    <TargetProfile>netcore</TargetProfile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
