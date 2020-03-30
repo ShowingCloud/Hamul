@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;netstandard2.0</TargetFrameworks>
+    <PackOnBuild>true</PackOnBuild>
+    <RepositoryUrl>https://github.com/ShowingCloud/Hamul</RepositoryUrl>
+    <ReleaseVersion>0.1</ReleaseVersion>
+    <Description>Based on Net Topology Suite, Hamul is a suite of 2D & 3D geographical toolkits
+
+https://github.com/ShowingCloud/Hamul</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Library|AnyCPU' ">
+    <IntermediateOutputPath>obj\Library</IntermediateOutputPath>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Library</OutputPath>
+    <DefineConstants></DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>false</NoStdLib>
+    <OtherFlags></OtherFlags>
+    <PlatformTarget></PlatformTarget>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Library.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharpPlus" Version="1.0.0" />
+    <PackageReference Include="GeoAPI" Version="1.7.5" />
+    <PackageReference Include="ProjNet" Version="2.0.0" />
+    <PackageReference Include="NetTopologySuite" Version="2.0.0" />
+  </ItemGroup>
+</Project>
