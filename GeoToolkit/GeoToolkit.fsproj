@@ -3,12 +3,16 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;netstandard2.0</TargetFrameworks>
     <PackOnBuild>true</PackOnBuild>
-    <RepositoryUrl>https://github.com/ShowingCloud/Alpherg</RepositoryUrl>
-    <ReleaseVersion>0.3</ReleaseVersion>
-    <Description>Alpherg is a tiny experimental project decrypting some UDP packets
+    <RepositoryUrl>https://github.com/ShowingCloud/Hamul</RepositoryUrl>
+    <ReleaseVersion>0.2</ReleaseVersion>
+    <Description>Based on Net Topology Suite, Hamul is a suite of 2D &amp; 3D geographical toolkits
 
-https://github.com/ShowingCloud/Alpherg</Description>
+https://github.com/ShowingCloud/Hamul</Description>
     <TargetProfile>netcore</TargetProfile>
+    <PackageId>ShowingCloud.GIS.GeoToolkit</PackageId>
+    <Authors>WANG Guoqin</Authors>
+    <Company>Showing Cloud Inc</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -44,5 +48,6 @@ https://github.com/ShowingCloud/Alpherg</Description>
     <PackageReference Include="GeoAPI" Version="1.7.5" />
     <PackageReference Include="ProjNet" Version="2.0.0" />
     <PackageReference Include="NetTopologySuite" Version="2.0.0" />
+    <PackageReference Include="FSharp.Core" Version="4.7.1" />
   </ItemGroup>
 </Project>

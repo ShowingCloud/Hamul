@@ -1,76 +1,79 @@
-VERSION=1.0.1
+VERSION=1.0.30
 SOURCE=GeoToolkit/Library.fs
 
 
 all: publish pack push
 
 clean:
-	dotnet clean -c Debug
-	dotnet clean -c Release
-	dotnet clean -c Library
+	dotnet clean -c Debug -f netcoreapp3.1
+	dotnet clean -c Release -f netcoreapp3.1
+	dotnet clean -c Library -f netcoreapp3.1
+	dotnet clean -c Debug -f netstandard2.0
+	dotnet clean -c Release -f netstandard2.0
+	dotnet clean -c Library -f netstandard2.0
 
 
 build: build-debug build-release build-library
 
-build-debug: GetToolkit/bin/Debug/netcoreapp3.1/GetToolkit.dll
+build-debug: GeoToolkit/bin/Debug/netcoreapp3.1/GeoToolkit.dll
  
-build-release: GetToolkit/bin/Release/netcoreapp3.1/GetToolkit.dll
+build-release: GeoToolkit/bin/Release/netcoreapp3.1/GeoToolkit.dll
 
-build-library: GetToolkit/bin/Library/netstandard2.0/GetToolkit.dll
+build-library: GeoToolkit/bin/Library/netstandard2.0/GeoToolkit.dll
 
 
 publish: publish-debug publish-release publish-library
 
-publish-debug: GetToolkit/bin/Debug/netcoreapp3.1/publish/GetToolkit.deps.json
+publish-debug: GeoToolkit/bin/Debug/netcoreapp3.1/publish/GeoToolkit.deps.json
 
-publish-release: GetToolkit/bin/Release/netcoreapp3.1/publish/GetToolkit.deps.json
+publish-release: GeoToolkit/bin/Release/netcoreapp3.1/publish/GeoToolkit.deps.json
 
-publish-library: GetToolkit/bin/Library/netstandard2.0/publish/GetToolkit.deps.json
+publish-library: GeoToolkit/bin/Library/netstandard2.0/publish/GeoToolkit.deps.json
 
 
 pack: pack-debug pack-release pack-library
 
-pack-debug: GetToolkit/bin/Debug/GetToolkit.${VERSION}.nupkg
+pack-debug: GeoToolkit/bin/Debug/ShowingCloud.GIS.GeoToolkit.${VERSION}.nupkg
 
-pack-release: GetToolkit/bin/Release/GetToolkit.${VERSION}.nupkg
+pack-release: GeoToolkit/bin/Release/ShowingCloud.GIS.GeoToolkit.${VERSION}.nupkg
 
-pack-library: GetToolkit/bin/Library/GetToolkit.${VERSION}.nupkg
+pack-library: GeoToolkit/bin/Library/ShowingCloud.GIS.GeoToolkit.${VERSION}.nupkg
 
 
 push: .nuget.pushed
 
 
-GetToolkit/bin/Release/netcoreapp3.1/GetToolkit.dll: ${SOURCE}
-	dotnet build -c Release
+GeoToolkit/bin/Release/netcoreapp3.1/GeoToolkit.dll: ${SOURCE}
+	dotnet build -c Release -f netcoreapp3.1
 
-GetToolkit/bin/Debug/netcoreapp3.1/GetToolkit.dll: ${SOURCE}
-	dotnet build -c Debug
+GeoToolkit/bin/Debug/netcoreapp3.1/GeoToolkit.dll: ${SOURCE}
+	dotnet build -c Debug -f netcoreapp3.1
 
-GetToolkit/bin/Library/netstandard2.0/GetToolkit.dll: ${SOURCE}
-	dotnet build -c Library
-
-
-GetToolkit/bin/Release/netcoreapp3.1/publish/GetToolkit.deps.json: GetToolkit/bin/Release/netcoreapp3.1/GetToolkit.dll
-	dotnet publish -c Release
-
-GetToolkit/bin/Debug/netcoreapp3.1/publish/GetToolkit.deps.json: GetToolkit/bin/Debug/netcoreapp3.1/GetToolkit.dll
-	dotnet publish -c Debug
-
-GetToolkit/bin/Library/netstandard2.0/publish/GetToolkit.deps.json: GetToolkit/bin/Library/netstandard2.0/GetToolkit.dll
-	dotnet publish -c Library
+GeoToolkit/bin/Library/netstandard2.0/GeoToolkit.dll: ${SOURCE}
+	dotnet build -c Library -f netstandard2.0
 
 
-GetToolkit/bin/Release/GetToolkit.${VERSION}.nupkg: GetToolkit/bin/Release/netcoreapp3.1/GetToolkit.dll
-	dotnet pack -c Release --no-build -p:Version=${VERSION}
+GeoToolkit/bin/Release/netcoreapp3.1/publish/GeoToolkit.deps.json: GeoToolkit/bin/Release/netcoreapp3.1/GeoToolkit.dll
+	dotnet publish -c Release -f netcoreapp3.1
 
-GetToolkit/bin/Debug/GetToolkit.${VERSION}.nupkg: GetToolkit/bin/Debug/netcoreapp3.1/GetToolkit.dll
-	dotnet pack -c Debug --no-build -p:Version=${VERSION}
+GeoToolkit/bin/Debug/netcoreapp3.1/publish/GeoToolkit.deps.json: GeoToolkit/bin/Debug/netcoreapp3.1/GeoToolkit.dll
+	dotnet publish -c Debug -f netcoreapp3.1
 
-GetToolkit/bin/Library/GetToolkit.${VERSION}.nupkg: GetToolkit/bin/Library/netstandard2.0/GetToolkit.dll
-	dotnet pack -c Library --no-build -p:Version=${VERSION}
+GeoToolkit/bin/Library/netstandard2.0/publish/GeoToolkit.deps.json: GeoToolkit/bin/Library/netstandard2.0/GeoToolkit.dll
+	dotnet publish -c Library -f netstandard2.0
 
 
-.nuget.pushed: GetToolkit/bin/Library/GetToolkit.${VERSION}.nupkg
+GeoToolkit/bin/Release/ShowingCloud.GIS.GeoToolkit.${VERSION}.nupkg: GeoToolkit/bin/Release/netcoreapp3.1/GeoToolkit.dll
+	dotnet pack -c Release --no-build -p:Version=${VERSION} -p:TargetFrameworks=netcoreapp3.1
+
+GeoToolkit/bin/Debug/ShowingCloud.GIS.GeoToolkit.${VERSION}.nupkg: GeoToolkit/bin/Debug/netcoreapp3.1/GeoToolkit.dll
+	dotnet pack -c Debug --no-build -p:Version=${VERSION} -p:TargetFrameworks=netcoreapp3.1
+
+GeoToolkit/bin/Library/ShowingCloud.GIS.GeoToolkit.${VERSION}.nupkg: GeoToolkit/bin/Library/netstandard2.0/GeoToolkit.dll
+	dotnet pack -c Library --no-build -p:Version=${VERSION} -p:TargetFrameworks=netstandard2.0
+
+
+.nuget.pushed: GeoToolkit/bin/Library/ShowingCloud.GIS.GeoToolkit.${VERSION}.nupkg
 	dotnet nuget push $< -s GitHub --skip-duplicate
 	nuget push $< -Source nuget.org -SkipDuplicate
 	touch .nuget.pushed
